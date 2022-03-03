@@ -24,15 +24,25 @@ public class Point implements Comparable<Point> {
     }
 
     public double slopeTo(Point that) {
-        /* YOUR CODE HERE */
+        double DeltaY = y - that.y;
+        double DeltaX = x - that.x;
+        if (DeltaX == 0) return Double.POSITIVE_INFINITY;
+        return DeltaY / DeltaX;
     }
 
     public int compareTo(Point that) {
-        /* YOUR CODE HERE */
+        if (y < that.y || (y == that.y && x < that.x)) return -1;
+        else return 1;
     }
 
-    public Comparator<Point> slopeOrder() {
-        /* YOUR CODE HERE */
+    public Comparator<Point> slopeOrder(Point a, Point b) {
+        return new SlopeOrder();
+    }
+
+    private static class SlopeOrder implements Comparator<Point> {
+        public int compare(Point a, Point b) {
+
+        }
     }
 
     public String toString() {
