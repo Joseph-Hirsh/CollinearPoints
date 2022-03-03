@@ -39,13 +39,19 @@ public class Point implements Comparable<Point> {
         return new SlopeOrder();
     }
 
-    private static class SlopeOrder implements Comparator<Point> {
+    private class SlopeOrder implements Comparator<Point> {
         public int compare(Point a, Point b) {
-
-        }
+            return Double.compare(slopeTo(a), slopeTo(b));
     }
+}
 
     public String toString() {
         return "(" + x + ", " + y + ")";
+    }
+
+    public static void main(String[] args) {
+        StdDraw.enableDoubleBuffering();
+        StdDraw.setXscale(0, 32768);
+        StdDraw.setYscale(0, 32768);
     }
 }
