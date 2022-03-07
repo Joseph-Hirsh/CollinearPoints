@@ -1,0 +1,22 @@
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+        int width = 500;
+        int height = 500;
+        int number = 100;
+
+        Random randomizer = new Random();
+        int x;
+        int y;
+
+        Point[] points = new Point[number];
+
+        for (int i = 0; i < number; i++) {
+            x = randomizer.nextInt(width + 1) + width;
+            y = randomizer.nextInt(height + 1) + height;
+            points[i] = new Point(x, y);
+        }
+        Brute brute = new Brute(points);
+    }
+}
