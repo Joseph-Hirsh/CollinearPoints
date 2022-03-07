@@ -1,15 +1,40 @@
-public class Brute {
-        Point[] points = new Point[N];
-        for (int p = 0; p < N; p++) {
-            for (int q = p + 1; q < N; q++) {
-                double pq = points[p].slopeTo(points[q]);
-                for (int r = q + 1; r < N; r++) {
-                    double pr = points[p].slopeTo(points[r]);
-                    for (int s = r + 1; s < N; s++) {
-                        double ps = points[p].slopeTo(points[s]);
+import java.util.ArrayList;
+import java.util.Arrays;
 
+public class Brute {
+        private LineSegment[] lineSegments;
+
+        //find all line segments containing 4 points
+        public Brute(Point[] points) {
+            ArrayList<LineSegment> storeSegments = new ArrayList<LineSegment>();
+            Arrays.sort(points);
+            int n = points.length;
+            for (int i = 0; i < n - 3; i++)
+                for (int j = i + 1; j < n - 2; j++)
+                    for (int k = j + 1; k < n - 1; k++) {
+                        if (points[i].slopeTo(points[j]) != points[i].slopeTo(points[k]))
+                            continue;
+                        for (int l = k + 1; l < n; l++) {
+                            if (points[i].slopeTo(points[j]) == points[i].slopeTo(points[k]) &&
+                                    points[i].slopeTo(points[j]) == points[i].slopeTo(points[l]))
+                                storeSegments.add(new LineSegment(points[i], points[l]));
                         }
                     }
-                }
-            }
+            lineSegments = storeSegments.toArray(new LineSegment[storeSegments.size()]);
         }
+
+        //the number of line segments
+        public int numberOfSegments() {
+            return lineSegments.length;
+        }
+
+        //the line segments
+        public LineSegment[] segments() {
+            return Arrays.copyOf(lineSegments, numberOfSegments());
+            LineSegment[] copySegment = new LineSegment[numberOfSegments()];
+            System.arraycopy(lineSegments, 0, copySegment, 0, numberOfSegments());
+            return copySegment;
+            return lineSegments.clone();
+        }
+    }
+}
