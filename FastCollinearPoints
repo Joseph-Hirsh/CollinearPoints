@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class FastCollinearPoints {
     public FastCollinearPoints(Point[] points) {
         int length = points.length;
@@ -9,24 +12,33 @@ public class FastCollinearPoints {
             slopes[i] = origin.slopeTo(point);
         }
 
-        // Sort points
+        Arrays.sort(slopes);
 
-        for (int j = 0; j < length; j++) {
-            int k = 0;
-            double root = slopes[j];
-            double[] adjacents;
+        int next = 1;
+        double root;
+        ArrayList<Double> adjacents;
+        double current;
 
-            while (root == slopes[j + k]) {
-                k++;
+        for (int j = 0; j < length; j += next) {
+            next = 1;
+
+            root = slopes[j];
+            current = root;
+            adjacents = new ArrayList<Double>();
+
+            while (root == current) {
+                current = slopes[j + next];
+                adjacents.add((double) (j + next));
+                next ++;
             }
         }
     }
 
     public int numberOfSegments() {
-
+        return 1; // temp 
     }
 
     public LineSegment[] segments() {
-
+        return new LineSegment[1]; // temp 
     }
 }
