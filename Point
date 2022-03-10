@@ -13,7 +13,7 @@ public class Point implements Comparable<Point> {
     public void draw() {
         for (int i = -50; i <= 50; i++) {
             for (int j = -50; j <= 50; j++) {
-                StdDraw.point(x+i, y+j);
+                StdDraw.point(x + i, y + j);
             }
         }
     }
