@@ -35,10 +35,10 @@ public class FastCollinearPoints {
     }
 
     public int numberOfSegments() {
-        return 1; // temp 
+        return 1; // temp
     }
 
     public LineSegment[] segments() {
-        return new LineSegment[1]; // temp 
+        return new LineSegment[1]; // temp
     }
 }
