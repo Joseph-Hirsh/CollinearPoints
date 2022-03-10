@@ -8,27 +8,31 @@ public class Brute {
     public Brute(Point[] points) {
         ArrayList<LineSegment> storeSegments = new ArrayList<LineSegment>();
         Arrays.sort(points);
-        int n = points.length;
-        for (int i = 0; i < n - 3; i++)
-            for (int j = i + 1; j < n - 2; j++)
-                for (int k = j + 1; k < n - 1; k++) {
-                    if (points[i].slopeTo(points[j]) != points[i].slopeTo(points[k]))
-                        continue;
-                    for (int l = k + 1; l < n; l++) {
-                        if (points[i].slopeTo(points[j]) == points[i].slopeTo(points[k]) &&
-                                points[i].slopeTo(points[j]) == points[i].slopeTo(points[l]))
-                            storeSegments.add(new LineSegment(points[i], points[l]));
+        int length = points.length;
+        for (int i = 0; i < length; i++) {
+            Point one = points[i];
+            for (int j = 1; j < length; j++) {
+                Point two = points[j];
+                for (int k = 2; k < length; k++) {
+                    Point three = points[k];
+                    for (int l = 3; l < length; l++) {
+                        Point four = points[l];
+                        if (one.slopeTo(two) == one.slopeTo(three) && one.slopeTo(two) == one.slopeTo(four)) {
+                            storeSegments.add(new LineSegment(one, four));
+                        }
                     }
                 }
-        lineSegments = storeSegments.toArray(new LineSegment[storeSegments.size()]);
+            }
+        }
+        lineSegments = storeSegments.toArray(new LineSegment[0]);
     }
 
-    //the number of line segments
+    // the number of line segments
     public int numberOfSegments() {
         return lineSegments.length;
     }
 
-    //the line segments
+    // the line segments
     public LineSegment[] segments() {
         return lineSegments.clone();
     }
