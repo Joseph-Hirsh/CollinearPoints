@@ -1,10 +1,11 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        int width = 500;
-        int height = 500;
-        int number = 100;
+        int width = 32768;
+        int height = 32768;
+        int number = 1000;
 
         Random randomizer = new Random();
         int x;
@@ -13,10 +14,12 @@ public class Main {
         Point[] points = new Point[number];
 
         for (int i = 0; i < number; i++) {
-            x = randomizer.nextInt(width + 1) + width;
-            y = randomizer.nextInt(height + 1) + height;
+            x = randomizer.nextInt(width);
+            y = randomizer.nextInt(height);
             points[i] = new Point(x, y);
         }
+
         Brute brute = new Brute(points);
+        System.out.println(Arrays.toString(brute.segments()));
     }
 }
