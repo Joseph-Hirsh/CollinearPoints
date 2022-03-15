@@ -6,33 +6,41 @@ public class Brute {
 
     //find all line segments containing 4 points
     public Brute(Point[] points) {
-        ArrayList<LineSegment> storeSegments = new ArrayList<LineSegment>();
+        ArrayList<LineSegment> storeSegments = new ArrayList<>();
         Arrays.sort(points);
-        int length = points.length;
-        for (int i = 0; i < length; i++) {
-            Point one = points[i];
-            for (int j = 1; j < length; j++) {
-                Point two = points[j];
-                for (int k = 2; k < length; k++) {
-                    Point three = points[k];
-                    for (int l = 3; l < length; l++) {
-                        Point four = points[l];
-                        if (one.slopeTo(two) == one.slopeTo(three) && one.slopeTo(two) == one.slopeTo(four)) {
-                            storeSegments.add(new LineSegment(one, four));
+
+        Point one;
+        Point two;
+        Point three;
+        Point four;
+
+        int amount = points.length;
+
+        for (int i = 0; i < amount; i++) {
+            one = points[i];
+            for (int j = 0; j < amount; j++) {
+                two = points[j];
+                for (int k = 0; k < amount; k++) {
+                    three = points[k];
+                    for (int l = 0; l < amount; l++) {
+                        four = points[l];
+                        if (one.slopeTo(two) == two.slopeTo(three) && two.slopeTo(three) == three.slopeTo(four)) {
+                            if (!one.equals(four)) {
+                                storeSegments.add(new LineSegment(one, four));
+                            }
                         }
                     }
                 }
             }
         }
-        lineSegments = storeSegments.toArray(new LineSegment[0]);
+        LineSegment[] array = new LineSegment[storeSegments.size()];
+        lineSegments = storeSegments.toArray(array);
     }
 
-    // the number of line segments
     public int numberOfSegments() {
         return lineSegments.length;
     }
 
-    // the line segments
     public LineSegment[] segments() {
         return lineSegments.clone();
     }
